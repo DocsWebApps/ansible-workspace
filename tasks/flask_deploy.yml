@@ -1,17 +1,9 @@
 - name: Deploy flask based web application
   hosts: websvr
   tasks:
-    - name: Ping test 
-      ping: 
-
     - name: Install all required dependencies
       yum:
         name: ['epel-release', 'python', 'python-devel'] 
-        state: present
-
-    - name: Install mysql-python package
-      yum:
-        name: MySQL-python
         state: present
 
     - name: Install pip
@@ -21,15 +13,12 @@
 
     - name: Install required Python libraries
       pip:
-        name: "{{ item }}"
+        name: ['flask','flask-mysql']
         state: present
-      with_items:
-        - "flask"
-        - "flask-mysql"
 
     - name: Copy source code
       copy:
-        src: app.py
+        src: files/app.py
         dest: /opt/app.py
 
     - name: Start web server

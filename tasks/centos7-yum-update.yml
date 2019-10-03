@@ -1,7 +1,7 @@
-# A plybook to update all my centos7-clients
+# A playbook to update all my centos7-clients
 -
   name: Update centos7 clients
-  hosts: centos7_clients
+  hosts: centos7_ssh
   tasks:
     - name: Update CentOS7 Clients
       yum:
