@@ -1,0 +1,9 @@
+[flaskwebapp]
+websvr
+dbsvr
+
+[centos7_ssh]
+centos7-ssh1
+centos7-ssh2
+centos7-ssh3
+centos7-ssh4

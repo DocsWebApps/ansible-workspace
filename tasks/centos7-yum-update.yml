@@ -1,0 +1,9 @@
+# A plybook to update all my centos7-clients
+-
+  name: Update centos7 clients
+  hosts: centos7_clients
+  tasks:
+    - name: Update CentOS7 Clients
+      yum:
+        name: "*"
+        state: latest 

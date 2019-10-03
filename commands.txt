@@ -1,0 +1,23 @@
+1. Copy ssh public key to remote server so that you cann ssh into remote wihtout password 
+ssh-copy-id -i /root/.ssh/id_rsa.pub root@docsdevops
+
+2. Ping all or host defined in /etc/ansible/hosts using the ping module (-m)
+ansible -m ping {all | host | group}
+As above but using an inventory filei instead
+ansible -m ping {all | host | group} -i inventory.txt
+
+3. Run a playbook
+ansible-playbook ./{playbook-name.yml} : Run playbook
+
+4. Using the service module (-m), stop the httpd service on web1 
+ansible web1 -m service -a "name=httpd state=stopped" : Stop httspd service on web1
+
+5. Command module - Execute ls on dbsvr using module command (-m) with "ls" as the module argument (-a)
+ansible dbsvr -m command -a "ls" -i inventory.txt
+
+6. Check Mode (-C)
+ansible dbsvr -C -m service -a "name=httpd state=stopped" -i inventory.txt
+Check that the operation can be done but don't actually do anything
+
+7. Update centos7 servers in group centos7_ssh
+ansible centos7_ssh -m yum -a "name=* state=latest" -i ./servers/inventory.txt
