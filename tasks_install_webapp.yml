@@ -1,0 +1,9 @@
+- name: Deploy DB
+  hosts: dbsvr
+  tasks:
+    - include: tasks/mysql_deploy_reusable.yml 
+  
+- name: Deploy WebApp 
+  hosts: websvr 
+  tasks:
+    - include: tasks/flask_deploy_reusable.yml 

@@ -1,0 +1,11 @@
+- name: Deploy Flask Web Application - DB Install
+  hosts: dbsvr
+  roles:
+    - python
+    - mysql_db
+  
+- name: Deploy Flask Web Application - Web Install
+  hosts: websvr
+  roles:
+    - python
+    - flask_web 

@@ -1,0 +1,46 @@
+- name: Install all required dependencies
+  yum:
+    name: ['epel-release', 'python', 'python-devel'] 
+    state: present
+
+- name: Install MySQL community repository
+  yum:
+    name: "http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm"
+    state: present
+
+- name: Install MySQL database
+  yum:
+    name: ['mysql-server','mysql-devel'] 
+    state: present
+
+- name: Install mysql-python package
+  yum:
+    name: MySQL-python
+    state: present
+
+- name: Create MySQL configuration file
+  copy:
+    content: |
+      [client]
+      user=root
+      password={{ root_pass }}
+    dest: "/etc/.my.cnf"
+
+- name: Start MySQL Service
+  service:
+    name: mysqld
+    state: started
+    enabled: yes
+
+- name: Create Application Database
+  mysql_db:
+    name: "{{ db_name }}" 
+    state: present
+
+- name: Create Database user
+  mysql_user:
+    name: "{{ db_user }}"
+    password: "{{ db_pass }}"
+    priv: '*.*:ALL'
+    state: present
+    host: '%'
